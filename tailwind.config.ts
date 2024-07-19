@@ -7,6 +7,18 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      mercator: {
+        blue: "#5555ff",
+        green: "#00aa00",
+        pink: "#ff55ff",
+        yellow: "#ffff55",
+        cyan: "#55ffff",
+        gray: "#aaaaaa",
+        red: "#ff5555",
+        orange: "#aa5500",
+      }
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
