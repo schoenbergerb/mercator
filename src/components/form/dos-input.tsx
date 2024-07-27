@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   onChange: (value: string) => void;
 };
 
 export const DosInput = ({ onChange }: Props) => {
-  const [playerName, setPlayerName] = useState("");
+  const [playerName, setPlayerName] = useState('');
 
   const input = useRef<HTMLInputElement>(null);
 
@@ -21,7 +21,7 @@ export const DosInput = ({ onChange }: Props) => {
         ref={input}
         value={playerName}
         className="outline-none opacity-0 absolute"
-        onKeyDown={({ key }) => key === "Enter" && onChange(playerName)}
+        onKeyDown={({ key }) => key === 'Enter' && onChange(playerName)}
         onChange={(e) => setPlayerName(e.currentTarget.value)}
         onLoad={(e) => e.currentTarget.focus()}
       />

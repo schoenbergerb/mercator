@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import SelectYesNo from "@/components/form/select-yes-no";
-import { LoadGame } from "@/components/load-game";
-import { NewGame } from "@/components/new-game";
+import { useEffect, useState } from 'react';
+import SelectYesNo from '@/components/form/select-yes-no';
+import { LoadGame } from '@/components/load-game';
+import { NewGame } from '@/components/new-game';
 
 export default function Intro() {
   const [newGame, setNewGame] = useState<boolean | undefined>();
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
 
   console.log(newGame);
 
   useEffect(() => {
     (async () => {
       let i = 0;
-      const t = "M e r c a t o r";
-      let titleNew = "";
+      const t = 'M e r c a t o r';
+      let titleNew = '';
       const interval = window.setInterval(() => {
         console.log(i);
         if (i >= t.length - 1) {
@@ -45,12 +45,7 @@ export default function Intro() {
       <div className="w-2/3 border-mercator-green border h-12 mt-12"></div>
       <div className="mt-12">
         {newGame === undefined ? (
-          <SelectYesNo
-            label="Neues Spiel?"
-            name="new-game"
-            onChange={setNewGame}
-            className="w-1/2 mt-20 text-left"
-          />
+          <SelectYesNo label="Neues Spiel?" name="new-game" onChange={setNewGame} className="w-1/2 mt-20 text-left" />
         ) : newGame ? (
           <NewGame />
         ) : (

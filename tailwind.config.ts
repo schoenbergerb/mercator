@@ -23,6 +23,9 @@ const config: Config = {
             }
         },
         extend: {
+            gridTemplateColumns: {
+                '20': 'repeat(20, minmax(0, 1fr))'
+            },
             animation: {
                 blink: "blink 1s step-end infinite"
             },

@@ -1,59 +1,49 @@
-'use client'
+'use client';
 
-import React, {useEffect, useRef, useState} from "react";
+import React, { useCallback, useEffect, useState } from 'react';
 
 type Props = {
-    label: string;
-    name: string;
-    onChange: (b: boolean) => void;
+  label: string;
+  name: string;
+  onChange: (b: boolean) => void;
 
-    className?: string;
-}
-export default function SelectYesNo({className, label, name, onChange}: Props) {
-    const [s, setSelected] = useState<boolean>(true)
+  className?: string;
+};
 
-    const onKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "ArrowLeft") {
-            setSelected(true)
-        } else if (e.key === "ArrowRight") {
-            setSelected(false)
-        } else if (e.key === "Enter") {
-            onChange(s)
-        }
-    }
+export default function SelectYesNo({ className, label, name, onChange }: Props) {
+  const [s, setSelected] = useState<boolean>(true);
 
-    const form = useRef<HTMLFormElement>(null)
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        setSelected(true);
+      } else if (e.key === 'ArrowRight') {
+        setSelected(false);
+      } else if (e.key === 'Enter') {
+        onChange(s);
+      }
+    },
+    [onChange, s],
+  );
 
+  useEffect(() => {
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [onKeyDown]);
 
-    useEffect(() => {
-
-        window.addEventListener("keydown", onKeyDown)
-        return () => window.removeEventListener("keydown", onKeyDown)
-    }, [onChange, s])
-
-    return (
-        <div className={`flex flex-row text-mercator-lightgreen ${className}`}>
-            <label className="text-nowrap">{label}</label>
-            <div className="flex ml-12 gap-2">
-                <label className={`px-2 ${s && "bg-mercator-darkblue"}`}>
-                    <input
-                        radioGroup={name}
-                        type="radio"
-                        value="yes"
-                        className="hidden"
-                    />
-                    <span>ja</span>
-                </label>
-                <label className={`px-2 ${!s && "bg-mercator-darkblue"}`}>
-                    <input
-                        type="radio"
-                        radioGroup={name}
-                        value="no"
-                        className="hidden"
-                    />
-                    <span>nein</span>
-                </label>
-            </div>
-        </div>
-    )
+  return (
+    <div className={`flex flex-row text-mercator-lightgreen ${className}`}>
+      <label className="text-nowrap">{label}</label>
+      <div className="flex ml-12 gap-2">
+        <label className={`px-2 ${s && 'bg-mercator-darkblue'}`}>
+          <input radioGroup={name} type="radio" value="yes" className="hidden" />
+          <span>ja</span>
+        </label>
+        <label className={`px-2 ${!s && 'bg-mercator-darkblue'}`}>
+          <input type="radio" radioGroup={name} value="no" className="hidden" />
+          <span>nein</span>
+        </label>
+      </div>
+    </div>
+  );
 }

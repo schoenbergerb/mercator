@@ -1,8 +1,6 @@
-import { Entity } from "@/logic/entities/entity.interface";
+import type { Entity } from './entity.interface';
 
-export interface SaveGame extends Entity {
-  id: number;
-
+export interface SaveGame extends Omit<Entity, 'gameId'> {
   username: string;
 
   money: number;
