@@ -1,4 +1,4 @@
-enum Goods {
+export enum Goods {
   WHEAT = '🌾',
   SILK_FABRICS = '👗',
   STEEL = '⛓',
