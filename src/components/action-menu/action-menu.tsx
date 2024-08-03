@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { menuEntries } from './menu-entries';
 
 type Props = {
@@ -11,21 +11,26 @@ type Props = {
 export const ActionMenu = ({ locked, onMenuItemChange }: Props) => {
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
 
-  const action = ({ key }: KeyboardEvent) => {
-    if (locked) {
-      return;
-    }
-    switch (key) {
-      case 'ArrowLeft':
-        return setSelectedMenuItem(selectedMenuItem > 0 ? selectedMenuItem - 1 : selectedMenuItem);
+  const action = useCallback(
+    ({ key }: KeyboardEvent) => {
+      if (locked) {
+        return;
+      }
+      switch (key) {
+        case 'ArrowLeft':
+          return setSelectedMenuItem(selectedMenuItem > 0 ? selectedMenuItem - 1 : selectedMenuItem);
 
-      case 'ArrowRight':
-        return setSelectedMenuItem(selectedMenuItem < menuEntries.length - 1 ? selectedMenuItem + 1 : selectedMenuItem);
+        case 'ArrowRight':
+          return setSelectedMenuItem(
+            selectedMenuItem < menuEntries.length - 1 ? selectedMenuItem + 1 : selectedMenuItem,
+          );
 
-      case 'Enter':
-        return onMenuItemChange(menuEntries[selectedMenuItem].id);
-    }
-  };
+        case 'Enter':
+          return onMenuItemChange(menuEntries[selectedMenuItem].id);
+      }
+    },
+    [locked, onMenuItemChange, selectedMenuItem],
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', action);

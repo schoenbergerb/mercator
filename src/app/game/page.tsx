@@ -40,7 +40,7 @@ export default function Game() {
       </fieldset>
       <div className="w-2/3 flex flex-col">
         <StockExchange game={game} />
-        <MainMenu />
+        <MainMenu activeMenu={activeMenu} />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ type Props = {
 };
 
 export const InfoMenu = ({ activeMenu }: Props) => {
-  if (activeMenu === 'ships' || true) {
+  if (activeMenu === 'ships') {
     return <ShipsMenu />;
   }
   return <StockMenu />;
